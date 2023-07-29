@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-tac Game</title>
+  <h1>Tic-Tac Game</h1>
+ 
+  
+</head>
+<body>
+  <div class="container">
+    <div data-index="0" class="box"></div>
+    <div data-index="1" class="box"></div>
+    <div data-index="2" class="box"></div>
+    <div data-index="3" class="box"></div>
+    <div data-index="4" class="box"></div>
+    <div data-index="5" class="box"></div>
+    <div data-index="6" class="box"></div>
+    <div data-index="7" class="box"></div>
+    <div data-index="8" class="box"></div>
+  </div>
+  <div id="status">Play Now</div>
+  <button id="Restart">Restart</button>
+
+
+  <script>
+    const boxs=document.querySelectorAll('.box');
+const statusTxt=document.querySelector('#status');
+const btnRestart=document.querySelector('#Restart');
+let x="X";
+let o="O";
+
+const win=[
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [2,4,6]
+];
+
+let options=["","","","","","","","",""];
+let currentPlayer=x;
+let player="X";
+let running=false;
+init();
+
+function init(){
+  boxs.forEach(box=>box.addEventListener('click',boxClick));
+  btnRestart.addEventListener('click',restartGame);
+  statusTxt.textContent=`${player} Your Turn`;
+  running=true;
+}
+
+function boxClick(){
+  const index=this.dataset.index;
+  if(options[index]!="" || !running){
+    return;
+  }
+  updateBox(this,index);
+  checkWinner();
+}
+
+function updateBox(box,index){
+  options[index]=player;
+  box.innerHTML=currentPlayer;
+}
+
+function changePlayer(){
+    player=(player=='X') ? "O" :"X";
+    currentPlayer=(currentPlayer==x) ? o :x;
+    statusTxt.textContent=`${player} Your Turn`;
+}
+
+function checkWinner(){
+  let isWon=false;
+  for(let i=0;i<win.length;i++){
+    const condition=win[i]; //[0,1,2]
+    const box1=options[condition[0]]; //x
+    const box2=options[condition[1]]; //''
+    const box3=options[condition[2]]; //''
+    if(box1=="" || box2=="" || box3==""){
+      continue;
+    }
+    if(box1==box2 && box2==box3){
+      isWon=true;
+      boxs[condition[0]].classList.add('win');
+      boxs[condition[1]].classList.add('win');
+      boxs[condition[2]].classList.add('win');
+    }
+  }
+
+  if(isWon){
+    statusTxt.textContent=`${player} Won..`;
+    running=false;
+  }else if(!options.includes("")){
+    statusTxt.textContent=`Game Draw..!`;
+    running=false;
+  }else{
+    changePlayer();
+  }
+
+}
+
+function restartGame(){
+  options=["","","","","","","","",""];
+  currentPlayer=x;
+  player="X";
+  running=true;
+  statusTxt.textContent=`${player} Your Turn`;
+
+  boxs.forEach(box=>{
+      box.innerHTML="";
+      box.classList.remove('win');
+  });
+}
+      </script>
+
+<style>
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+body{
+  width:100vw;
+  height:100vh;
+  background-color: black;
+  color:white;
+ 
+  display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+}
+.box{
+  width:105px;
+  height:105px;
+  border:2px solid blue;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.container{
+  display: grid;
+  grid-template-columns: repeat(3,auto);
+}
+#status{
+  padding: 20px;
+  font-size:29px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 500;
+}
+button{
+  color:white;
+  background-color: red;
+  height:45px;
+  width:80px;
+  border-radius: 10px;
+  font-size: 14px;
+  box-shadow: 0px 0px 2px 0px whitesmoke;
+
+}
+button:hover{
+  background-color: rgb(132, 0, 255);
+ animation: ani 0.8s infinite;
+}
+@keyframes ani {
+from{
+  transform: translate(5px);
+}
+to{
+  transform: translate(-5px);
+}
+  
+}
+h1{
+  padding: 20px;
+  font-size: 30px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+  font-weight: 200;
+}
+h1:hover{
+  text-decoration: underline;
+}
+</style>
+
+</body>
+</html>
