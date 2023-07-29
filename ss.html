@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chatbot Example</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="chatbox">
+		<div class="header">
+			<h4>Chatbot</h4>
+		</div>
+		<div class="conversation"></div>
+		<div class="message-box">
+			<input type="text" id="user-input" placeholder="Type here...">
+			<button id="send-btn">Send</button>
+		</div>
+	</div>
+    <style>
+        .chatbox {
+    width: 300px;
+    height: 400px;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.conversation {
+    height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+.message-box {
+    display: flex;
+    padding: 10px;
+}
+
+#user-input {
+    width: 80%;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+#send-btn {
+    width: 20%;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+    </style>
+    <script>
+        // define the chatbot's response logic
+function getResponse(userInput) {
+    // insert your chatbot's response logic here
+    // for example, you can use APIs like Dialogflow or Wit.ai
+    // to analyze the user's input and generate an appropriate response
+    // for now, we'll just return a generic response
+    return "I'm sorry, I didn't understand that.";
+}
+
+// add a listener for when the user hits enter or clicks the send button
+document.getElementById("user-input").addEventListener("keydown", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("send-btn").click();
+    }
+});
+
+document.getElementById("send-btn").addEventListener("click", function() {
+    // get the user's input and clear the input field
+    var userInput = document.getElementById("user-input").value;
+    document.getElementById("user-input").value = "";
+
+    // create a new message element for the user's input
+    var userMessage = document.createElement("div");
+    userMessage.classList.add("message");
+    userMessage.classList.add("user");
+    userMessage.innerHTML = userInput;
+
+    // add the message to the conversation
+    var conversation = document.querySelector(".conversation");
+    conversation.appendChild(userMessage);
+
+    // get the chatbot's response and create a new message element for it
+    var chatbotResponse = getResponse(userInput);
+    var chatbotMessage = document.createElement("div");
+    chatbotMessage.classList.add("message");
+    chatbotMessage.classList.add("chatbot");
+    chatbotMessage.innerHTML = chatbotResponse;
+
+    //
+
+
+    </script>
+
+	
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		groco FAQ
+	</title>
+
+</head>
+<body>
+	<style>
+		h2{
+			background-color:#f86270 ;
+			margin-right: 1200px;
+			font size: 30px;
+
+		}
+		*{
+			text-align: center;
+			font-size: 16px;
+			background-color:#beb5fc;
+		}
+		.o1{
+			background-color:#beb5fc ;
+			margin-left: 450px;
+			margin-right: 450px;
+
+	}
+		.k1{
+margin-top: 35px;
+		}
+		
+	</style>
+	<script>
+		var a,b;
+		a=prompt("feedback mesaage :")
+		b=alert("your order will receive soon!")
+
+		return validate();{
+		var re=	document.getElementByid("gr");
+		if(re==""){
+			alert("name does not empty")
+			documnet.gr.focus();
+			return false;
+
+		}
+
+		}
+
+	</script>
+	<h2 >FAQ</h2><form>
+<div class="o1">
+	<label><b><u><i>firstname:</i></u></b></label>
+	<input type="text" values="firstname" placeholder=" your firstname" id="gr" onsubmit="return validate();"><br><br>		
+	<label><b><u><i>lastname:</i></u></b></label>
+	<input type="text" values="lastname" placeholder=" your lastname"><br><br>	
+	<label><b><u><i>email<:/i></u></b></label>
+	<input type="email" values="email ID" placeholder=" your email ID"><br><br>
+		<label><b><u><i>DOB</i></u></b></label>
+	<input type="date" values="dob"><br><br>
+	<label><u><b>country</b></u></label>
+	<select id="country" name="country">
+		<option value="india">india</option>
+		<option value="china">china</option>
+		<option value="USA">USA</option>
+		<option value="japan">japan</option>
+		<option value="russia">russia</option>
+	</select><br><br>
+
+
+	<label><b><u>address</u></b></label>
+	<input type="textarea" values="address"></form>
+
+	<br><br>
+	<input type="reset" values="reset">
+	<input type="submit" values="submit"></div><div class="k1">
+	<img src="feedback.png" width="200" height="100"></div>
+
+
+</body>
+</html>
